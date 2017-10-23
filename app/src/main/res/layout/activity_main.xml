@@ -15,4 +15,12 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="196dp"
         android:id="@+id/button2"/>
+    <TextView
+        android:text="Please shake your device to get a fortune"
+        android:layout_centerInParent="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:id="@+id/shakeTextView"
+        android:layout_weight="0.58"/>
 </RelativeLayout>
