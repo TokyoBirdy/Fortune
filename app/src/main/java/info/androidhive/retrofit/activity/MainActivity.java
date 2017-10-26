@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import java.util.List;
 import java.util.Random;
@@ -63,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+        ApiInterface apiService = ApiClient.getClient(getApplicationContext().getCacheDir(),getApplicationContext()).create(ApiInterface.class);
 
         Call<List<Fortune>> call = apiService.getItems();
 
@@ -71,8 +72,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<Fortune>> call, Response<List<Fortune>> response) {
                 mFortunes = response.body();
-
-
             }
 
             @Override
@@ -80,7 +79,6 @@ public class MainActivity extends AppCompatActivity {
                 Log.e(TAG, t.toString());
             }
         });
-
 
     }
 // can we generate this @Override?
@@ -97,9 +95,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
     private void handleShakeEvent(int count) {
-
+        int number = generateRandomNmber();
+        String quote = mFortunes.get(number).getQuote();
+        TextView textView = (TextView) findViewById(R.id.shakeTextView);
+        textView.setText(quote);
     }
 
     private int generateRandomNmber() {
